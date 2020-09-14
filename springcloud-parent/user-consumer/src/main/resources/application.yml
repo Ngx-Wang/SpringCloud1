@@ -1,0 +1,23 @@
+server:
+  port: 18082
+spring:
+  application:
+    name: user-consumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka # EurekaServer的地址
+feign:
+  hystrix:
+    enabled: true # 开启Feign的熔断功能
+  compression:
+    request:
+      enabled: true # 开启请求压缩
+
+      #以上数据类型，压缩大小下限均为默认值
+    response:
+      enabled: true # 开启响应压缩
+# com.atguigu 包下的日志级别都为Debug
+logging:
+  level:
+    com.atguigu: debug

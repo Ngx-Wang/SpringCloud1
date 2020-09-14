@@ -1,0 +1,48 @@
+server:
+  port: 18083
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/springcloud?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+  application:
+    name: user-provider
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka # EurekaServer的地址
+#    registry-fetch-interval-seconds: 30
+#  instance:
+#    #指定IP地址
+#    ip-address: 127.0.0.1
+#    #访问服务的时候，推荐使用IP
+#    prefer-ip-address: true
+#    #租约到期，服务时效时间，默认值90秒
+#    lease-expiration-duration-in-seconds: 150
+#    #租约续约间隔时间，默认30秒
+#    lease-renewal-interval-in-seconds: 30
+
+
+#负载均衡算法
+# 修改服务地址轮询策略，默认是轮询，配置之后变随机
+#user-provider:
+#  ribbon:
+    #轮询
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#    随机算法
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    #重试算法,该算法先按照轮询的策略获取服务,如果获取服务失败则在指定的时间内会进行重试，获取可用的服务
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule
+    #加权法,会根据平均响应时间计算所有服务的权重，响应时间越快服务权重越大被选中的概率越大。刚启动时如果同统计信息不足，则使用轮询的策略，等统计信息足够会切换到自身规则。
+  #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.ZoneAvoidanceRule
+# 修改服务地址轮询策略，默认是轮询，配置之后变随机
+user-provider:
+  ribbon:
+    #轮询
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
+#    ConnectTimeout: 1000 # 连接超时时间 没有连接上
+#    ReadTimeout: 120000 # 数据读取超时时间 连接上了，连上之后开始计时，但读取数据需要花费很长时间
+#    MaxAutoRetries: 1 # 最大重试次数(第一个服务)在第一次连接超时之后，在重新连接一次
+#    MaxAutoRetriesNextServer: 0 # 最大重试下一个服务次数(集群的情况才会用到)
+#    OkToRetryOnAllOperations: false # 是否所有操作都进行重试
